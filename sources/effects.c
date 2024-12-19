@@ -287,7 +287,7 @@ void activate_tool_eraser_select(int fd_touch) {
 }
 
 void deactivate_tool_eraser_select(int fd_touch) {
-  // printf("Deactivating ToolEraseSelect: writing writing_tool on\n");
+  printf("Deactivating ToolEraseSelect: writing writing_tool on\n");
   write_oriented_tap_sequence_toolbar(fd_touch, 3, SLEEP, WRITING, SLEEP);
   toolEraseSelect = 0;
 }
