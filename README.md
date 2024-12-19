@@ -126,7 +126,7 @@ docker build --platform linux/amd64 -t remarkable .
 Run the command with
 
 ``` console
-docker run --rm -ti -v $(pwd):/mnt/RemarkableLamyEraser remarkable
+docker run --rm --platform linux/amd64 -ti -v $(pwd):/mnt/RemarkableLamyEraser remarkable
 ```
 
 Once inside, compile the project with
