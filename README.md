@@ -22,13 +22,13 @@ The tool will definitely break when the reMarkable updates.
 When that happens, just reinstall!
 
 ``` console
-$ sh -c "$(wget https://raw.githubusercontent.com/slotThe/RemarkableLamyEraser/main/scripts/LamyInstall.sh -O-)"
+$ sh -c "$(wget --no-check-certificate https://raw.githubusercontent.com/matthewgomezcullen/RemarkableLamyEraser/main/scripts/LamyInstall.sh -O-)"
 ```
 
 ## Uninstall
 
 ``` console
- $ sh -c "$(wget https://raw.githubusercontent.com/slotThe/RemarkableLamyEraser/main/scripts/LamyUninstall.sh -O-)"
+ $ sh -c "$(wget --no-check-certificate https://raw.githubusercontent.com/matthewgomezcullen/RemarkableLamyEraser/main/scripts/LamyUninstall.sh -O-)"
 ```
 
 # Usage
@@ -117,17 +117,21 @@ This will furthermore print some additional debugging information—great when o
 # Developing
 
 There is [Dockerfile](./Dockerfile) available,
-which builds the toolchain and comes equipped with `qtcreator`.
-To build, run
+which builds the toolchain and enters a bash shell.
 
 ``` console
-$ docker build -t remarkable .
+docker build --platform linux/amd64 -t remarkable .
 ```
 
-Running this is a bit awkward, as it requires teaching docker about X forwarding:
+Run the command with
 
 ``` console
-$ docker run --rm -ti --net=host --ipc=host -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --env="QT_X11_NO_MITSHM=1" remarkable
+docker run --rm -ti -v $(pwd):/mnt/RemarkableLamyEraser remarkable
+```
+
+Once inside, compile the project with
+``` console
+gcc -o RemarkableLamyEraser sources/*.c -Iheaders -lm
 ```
 
 # Other Styli
