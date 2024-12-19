@@ -131,7 +131,7 @@ docker run --rm --platform linux/amd64 -ti -v $(pwd):/mnt/RemarkableLamyEraser r
 
 Once inside, compile the project with
 ``` console
-gcc -o RemarkableLamyEraser sources/*.c -Iheaders -lm
+make
 ```
 
 # Other Styli
