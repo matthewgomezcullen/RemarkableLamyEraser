@@ -18,7 +18,4 @@ WORKDIR /mnt/RemarkableLamyEraser/
 # Copy the project files into the container
 COPY ./ ./
 
-# Default command to compile the project
-RUN source /opt/codex/rm11x/3.1.15/environment-setup-cortexa7hf-neon-remarkable-linux-gnueabi
-
-CMD make clean && make
+CMD ["/bin/bash", "-c", "source /opt/codex/rm11x/3.1.15/environment-setup-cortexa7hf-neon-remarkable-linux-gnueabi && make clean && make"]
