@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM --platform=linux/amd64 ubuntu:20.04
 
 ENV DEBIAN_FRONTEND=noninteractive 
 
@@ -19,4 +19,6 @@ WORKDIR /mnt/RemarkableLamyEraser/
 COPY ./ ./
 
 # Default command to compile the project
-CMD ["/bin/bash"]
+RUN source /opt/codex/rm11x/3.1.15/environment-setup-cortexa7hf-neon-remarkable-linux-gnueabi
+
+CMD make clean && make

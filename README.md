@@ -22,13 +22,13 @@ The tool will definitely break when the reMarkable updates.
 When that happens, just reinstall!
 
 ``` console
-$ sh -c "$(wget --no-check-certificate https://raw.githubusercontent.com/matthewgomezcullen/RemarkableLamyEraser/main/scripts/LamyInstall.sh -O-)"
+sh -c "$(wget --no-check-certificate https://raw.githubusercontent.com/matthewgomezcullen/RemarkableLamyEraser/main/scripts/LamyInstall.sh -O-)"
 ```
 
 ## Uninstall
 
 ``` console
- $ sh -c "$(wget --no-check-certificate https://raw.githubusercontent.com/matthewgomezcullen/RemarkableLamyEraser/main/scripts/LamyUninstall.sh -O-)"
+sh -c "$(wget --no-check-certificate https://raw.githubusercontent.com/matthewgomezcullen/RemarkableLamyEraser/main/scripts/LamyUninstall.sh -O-)"
 ```
 
 # Usage
@@ -102,14 +102,14 @@ After making changes to the configuration file,
 run this command to restart the program:
 
 ``` console
-$ systemctl restart LamyEraser.service
+systemctl restart LamyEraser.service
 ```
 
 You can also check your current config by running the program directly
 
 ``` console
-$ systemctl stop LamyEraser.service
-$ RemarkableLamyEraser
+systemctl stop LamyEraser.service
+RemarkableLamyEraser
 ```
 
 This will furthermore print some additional debugging information—great when opening an issue!
@@ -117,7 +117,7 @@ This will furthermore print some additional debugging information—great when o
 # Developing
 
 There is [Dockerfile](./Dockerfile) available,
-which builds the toolchain and enters a bash shell.
+which builds the toolchain and cross-compiles the project for the reMarkable.
 
 ``` console
 docker build --platform linux/amd64 -t remarkable .
@@ -127,11 +127,6 @@ Run the command with
 
 ``` console
 docker run --rm --platform linux/amd64 -ti -v $(pwd):/mnt/RemarkableLamyEraser remarkable
-```
-
-Once inside, compile the project with
-``` console
-make
 ```
 
 # Other Styli
