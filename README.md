@@ -1,3 +1,5 @@
+*This is an attempt at fixing bugs on remarkable 3.X.X. The key issue I found was that there are two writing tabs on the left, so everything must be shifted down one. I simplified the build to not use qtcreator. The code no longer double taps options (e.g., opening the writing menu when the intention was to select writing.*
+
 # RemarkableLamyEraser
 
 Standalone tool that turns the button on the Lamy Pen into an eraser on the reMarkable.

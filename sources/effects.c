@@ -65,14 +65,6 @@ void write_tap_with_touch(int fd_touch, const int location[2]) {
   event = (struct input_event){.type = EV_SYN, .code = SYN_REPORT, .value = 1};
   // printf("Writing SYN Report\n");
   write_event(fd_touch, event);
-
-  event = (struct input_event){.type = EV_ABS, .code = ABS_MT_TRACKING_ID, .value = -1};
-  // printf("Writing Tracking ID: -1\n");
-  write_event(fd_touch, event);
-
-  event = (struct input_event){.type = EV_SYN, .code = SYN_REPORT, .value = 1};
-  // printf("Writing SYN Report\n");
-  write_event(fd_touch, event);
 }
 
 void write_oriented_tap(int fd, toolbar_orientation orientation, int action) {
@@ -109,11 +101,10 @@ int write_oriented_tap_sequence(int fd, int numLocations, ...) {
 }
 
 int write_oriented_tap_sequence_toolbar(int fd, int numLocations, ...) {
-  toolbar_orientation orientation = get_toolbar_orientation();
-
   int action;
   va_list actionType;
   va_start(actionType, numLocations);
+  toolbar_orientation orientation = get_toolbar_orientation();
 
   for (int i = 0; i < numLocations; i++) {
     action = va_arg(actionType, int);
@@ -282,13 +273,13 @@ void tool_eraser_select(enum effect_type etype, int fd_touch) {
 
 void activate_tool_eraser_select(int fd_touch) {
   printf("activating eraser select...\n");
-  write_oriented_tap_sequence_toolbar(fd_touch, 4, ERASER_PANEL, ERASER_PANEL, ERASER_SELECTION, ERASER_PANEL);
+  write_oriented_tap_sequence_toolbar(fd_touch, 1, ERASER_PANEL); // assumes the eraser selection is selected
   toolEraseSelect = 1;
 }
 
 void deactivate_tool_eraser_select(int fd_touch) {
   printf("Deactivating ToolEraseSelect: writing writing_tool on\n");
-  write_oriented_tap_sequence_toolbar(fd_touch, 3, SLEEP, WRITING, SLEEP);
+  write_oriented_tap_sequence_toolbar(fd_touch, 1, WRITING);
   toolEraseSelect = 0;
 }
 
@@ -312,15 +303,13 @@ void tool_select(enum effect_type etype, int fd_touch) {
 
 void activate_tool_select(int fd_touch) {
   // printf("Activating ToolSelect: writing select tool on\n");
-  write_oriented_tap_sequence(fd_touch, 5, SELECT, TOOLBAR, SELECT,
-                              LONG_SLEEP, TOOLBAR);
+  write_oriented_tap_sequence(fd_touch, 1, SELECT);
   toolSelect = 1;
 }
 
 void deactivate_tool_select(int fd_touch) {
   // printf("Deactivating ToolSelect: writing writing tool on\n");
-  write_oriented_tap_sequence(fd_touch, 5, WRITING, TOOLBAR, WRITING,
-                              LONG_SLEEP, TOOLBAR);
+  write_oriented_tap_sequence(fd_touch, 1, WRITING);
   toolSelect = 0;
 }
 
